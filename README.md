@@ -10,7 +10,7 @@ class ViewController: UIViewController {
 
     var funcTracker = FunctionCallTracker()
 
-    func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated: animated)
             if funcTracker.isFirstTimeCall() {
                 // do something only on first call of viewWillAppear
