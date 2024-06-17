@@ -8,7 +8,7 @@ example:
 ```swift
 class ViewController: UIViewController {
 
-    var funcTracker = FunctionCallTracker()
+    private let funcTracker = FunctionCallTracker()
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated: animated)
