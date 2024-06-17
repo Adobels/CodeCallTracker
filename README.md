@@ -1,2 +1,2 @@
 # FunctionCallTracker
-FunctionCallTracker facilitates executing code exclusively on the initial call of a function
+FunctionCallTracker facilitates executing code exclusively on the first call of a function
