@@ -7,38 +7,33 @@
 
 public class FunctionCallTracker {
 
-    public struct Configuration {
-        let functionNameAndLine = true
-    }
-    private var store: [String] = []
-    private let configuration: Configuration
+    private var store: Set<String> = []
 
-    init(configuration: Configuration = .init()) {
-        self.configuration = configuration
-    }
+    public init() { }
 
-    func executeOnFirstTimeCall(_ functionName: String = #function, _ line: Int = #line, block: () -> Void) {
-        let funcIdentifier = if configuration.functionNameAndLine {
-            functionName + ":" + String(line)
-        } else {
-            functionName
-        }
+    func executeOnFirstTimeCall(_ fileId: String = #fileID, _ line: Int = #line, _ column: Int = #column, _ block: () -> Void) {
+        let funcIdentifier = "\(fileId):\(line):\(column)"
         if !store.contains(funcIdentifier) {
-            store.append(funcIdentifier)
+            store.insert(funcIdentifier)
             block()
         }
     }
 
-    public func isFirstTimeCall(_ functionName: String = #function, _ line: Int = #line) -> Bool {
-        let funcIdentifier = if configuration.functionNameAndLine {
-            functionName + ":" + String(line)
+    func executeOnNextNotFirstTimeCall(_ fileId: String = #fileID, _ line: Int = #line, _ column: Int = #column, _ block: () -> Void) {
+        let funcIdentifier = "\(fileId):\(line):\(column)"
+        if store.contains(funcIdentifier) {
+            block()
         } else {
-            functionName
+            store.insert(funcIdentifier)
         }
+    }
+
+    public func isFirstTimeCall(_ fileId: String = #fileID, _ line: Int = #line, _ column: Int = #column) -> Bool {
+        let funcIdentifier = "\(fileId):\(line):\(column)"
         if store.contains(funcIdentifier) {
             return false
         } else {
-            store.append(funcIdentifier)
+            store.insert(funcIdentifier)
             return true
         }
     }
