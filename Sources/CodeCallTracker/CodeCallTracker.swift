@@ -1,11 +1,11 @@
 //
-//  FunctionCallTracker.swift
-//
+//  CodeCallTracker.swift
+//  CodeCallTracker
 //
 //  Created by Blazej Sleboda on 17/06/2024.
 //
 
-public class FunctionCallTracker {
+public class CodeCallTracker {
 
     private var store: Set<String> = []
 

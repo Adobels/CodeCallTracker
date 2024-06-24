@@ -1,14 +1,14 @@
 //
-//  FunctionCallTrackerMultipleIfInTheSameLine.swift
-//
+//  CodeCallTrackerMultipleIfInTheSameLine.swift
+//  CodeCallTracker
 //
 //  Created by Blazej Sleboda on 17/06/2024.
 //
 
 import XCTest
-@testable import FunctionCallTracker
+@testable import CodeCallTracker
 
-final class FunctionCallTrackerMultipleIfInTheSameLine: XCTestCase {
+final class CodeCallTrackerMultipleIfInTheSameLine: XCTestCase {
 
     func testMultipleIfInTheSameLine() throws {
         let vc = ViewController()
@@ -17,15 +17,15 @@ final class FunctionCallTrackerMultipleIfInTheSameLine: XCTestCase {
     }
 }
 
-extension FunctionCallTrackerMultipleIfInTheSameLine {
+extension CodeCallTrackerMultipleIfInTheSameLine {
 
     class ViewController {
 
-        let funcTracker = FunctionCallTracker()
+        let codeTracker = CodeCallTracker()
         var result: [String] = []
 
         func start() {
-            let str = funcTracker.isFirstTimeCall() ? "str_1" : "str_2"; let str2 = funcTracker.isFirstTimeCall() ? "str_1" : "str_2";
+            let str = codeTracker.isFirstTimeCall() ? "str_1" : "str_2"; let str2 = codeTracker.isFirstTimeCall() ? "str_1" : "str_2";
             result.append(contentsOf: [str, str2])
         }
     }

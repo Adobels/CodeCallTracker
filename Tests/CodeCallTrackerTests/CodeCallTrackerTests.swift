@@ -1,7 +1,15 @@
-import XCTest
-@testable import FunctionCallTracker
+//
+//  CodeCallTrackerTests.swift
+//  CodeCallTracker
+//
+//  Created by Blazej Sleboda on 17/06/2024.
+//
 
-final class FunctionCallTrackerTests: XCTestCase {
+
+import XCTest
+@testable import CodeCallTracker
+
+final class CodeCallTrackerTests: XCTestCase {
 
     typealias SUT = SpyViewController
     private var spy: SUT!
@@ -11,7 +19,7 @@ final class FunctionCallTrackerTests: XCTestCase {
         spy = .init()
     }
 
-    func testIsFirstTimeCallIsCalledOnlyOnFirstCall() throws {
+    func testisFirstTimeCallIsCalledOnlyOnFirstCall() throws {
         spy.viewDidLoad()
         XCTAssertEqual(spy.viewDidLoadCallCounter, 1)
         XCTAssertEqual(spy.viewWillAppearArgumentBoolCallCounter, .zero)
@@ -29,7 +37,7 @@ final class FunctionCallTrackerTests: XCTestCase {
         XCTAssertEqual(spy.viewWillAppearArgumentBoolCallCounter, 1)
     }
 
-    func testIsFirstTimeCallArgumentValuesNoImpact() throws {
+    func testisFirstTimeCallArgumentValuesNoImpact() throws {
         spy.viewWillAppear(false)
         XCTAssertEqual(spy.viewWillAppearArgumentBoolCallCounter, 1)
 
@@ -37,7 +45,7 @@ final class FunctionCallTrackerTests: XCTestCase {
         XCTAssertEqual(spy.viewWillAppearArgumentBoolCallCounter, 1)
     }
 
-    func testIsFirstTimeCallArgumentTypesNoInterference() throws {
+    func testisFirstTimeCallArgumentTypesNoInterference() throws {
         spy.viewWillAppear(false)
         XCTAssertEqual(spy.viewWillAppearArgumentBoolCallCounter, 1)
         XCTAssertEqual(spy.viewWillAppearArgumentStringCallCounter, .zero)
@@ -48,7 +56,7 @@ final class FunctionCallTrackerTests: XCTestCase {
     }
 }
 
-extension FunctionCallTrackerTests {
+extension CodeCallTrackerTests {
 
     class BaseViewController {
 
@@ -59,7 +67,7 @@ extension FunctionCallTrackerTests {
 
     class ViewController: BaseViewController {
 
-        var funcCallTracker = FunctionCallTracker()
+        var codeTracker = CodeCallTracker()
     }
 
     class SpyViewController: ViewController {
@@ -70,20 +78,20 @@ extension FunctionCallTrackerTests {
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            if funcCallTracker.isFirstTimeCall() {
+            if codeTracker.isFirstTimeCall() {
                 viewDidLoadCallCounter += 1
             }
         }
 
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            if funcCallTracker.isFirstTimeCall() {
+            if codeTracker.isFirstTimeCall() {
                 viewWillAppearArgumentBoolCallCounter += 1
             }
         }
 
         func viewWillAppear(_ animated: String) {
-            if funcCallTracker.isFirstTimeCall() {
+            if codeTracker.isFirstTimeCall() {
                 viewWillAppearArgumentStringCallCounter += 1
             }
         }
