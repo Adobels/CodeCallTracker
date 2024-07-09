@@ -8,11 +8,11 @@ example:
 ```swift
 class ViewController: UIViewController {
 
-    private let codeTracker = CodeCallTracker()
+    private let code = CodeCallTracker()
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated: animated)
-        if codeTracker.isFirstTimeCall() {
+        if code.isFirstTimeCall() {
             // do something only on first call of viewWillAppear
         } else {
             // do something on other calls of viewWillAppear
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     }
     
     override func updateViewConstraints() {
-        if codeTracker.isFirstTimeCall() {
+        if code.isFirstTimeCall() {
             // do something only on first call of updateViewConstraints
         } else {
             // do something on other calls of updateViewConstraints
